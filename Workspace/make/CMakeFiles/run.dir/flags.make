@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/home/noahv/Documents/Programming/Numerical Methods/Workspace/../NR_C301/code" -I"/home/noahv/Documents/Programming/Numerical Methods/Workspace/../include"
+CXX_INCLUDES = -I/home/noahv/Documents/Programming/Numerical-methods-exercises/Workspace/../NR_C301/code -I/home/noahv/Documents/Programming/Numerical-methods-exercises/Workspace/../include
 
 CXX_FLAGS = -std=gnu++17
 

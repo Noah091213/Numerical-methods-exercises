@@ -1,7 +1,7 @@
 CMakeFiles/run.dir/MultiDimRoots.cpp.o: \
- /home/noahv/Documents/Programming/Numerical\ Methods/Workspace/MultiDimRoots.cpp \
+ /home/noahv/Documents/Programming/Numerical-methods-exercises/Workspace/MultiDimRoots.cpp \
  /usr/include/stdc-predef.h \
- /home/noahv/Documents/Programming/Numerical\ Methods/Workspace/NR_C301/code/nr3.h \
+ /home/noahv/Documents/Programming/Numerical-methods-exercises/Workspace/NR_C301/code/nr3.h \
  /usr/include/c++/13/fstream /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -195,6 +195,6 @@ CMakeFiles/run.dir/MultiDimRoots.cpp.o: \
  /usr/include/linux/falloc.h /usr/include/x86_64-linux-gnu/bits/stat.h \
  /usr/include/x86_64-linux-gnu/bits/struct_stat.h /usr/include/string.h \
  /usr/include/strings.h \
- /home/noahv/Documents/Programming/Numerical\ Methods/Workspace/NR_C301/code/ludcmp.h \
- /home/noahv/Documents/Programming/Numerical\ Methods/Workspace/NR_C301/code/qrdcmp.h \
- /home/noahv/Documents/Programming/Numerical\ Methods/Workspace/NR_C301/code/roots_multidim.h
+ /home/noahv/Documents/Programming/Numerical-methods-exercises/Workspace/NR_C301/code/ludcmp.h \
+ /home/noahv/Documents/Programming/Numerical-methods-exercises/Workspace/NR_C301/code/qrdcmp.h \
+ /home/noahv/Documents/Programming/Numerical-methods-exercises/Workspace/NR_C301/code/roots_multidim.h
