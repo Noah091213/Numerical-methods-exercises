@@ -38,11 +38,11 @@ int main() {
     double d     = 30;              // Distance between pylons, it is given as variable, but later stated as fact    
     // Guesstimated values
     double a     = 40;                              // Parameter in the catenary equation for the cable
-    double H     = 100;                             // String tension in the cable
+    double H     = 84.8;                            // String tension in the cable
     // Calculated values
     double x     = (d/2.0) - k;                     // half the distance between the cables attachment points
     double L     = 2.0*a*sinh(x/a);                 // Suspended length of the cable
-    double L0    = L;                               // Resting length
+    double L0    = L;                               // Resting length, fairly close to L, so as a guess it is close enough, but it could be optimized
     double p     = a*(cosh(x/a) - 1.0);             // Sagging of cable from the cables attachment points
     double phi   = atan(sinh(x/a));                 // Angle between cable and horizontal plane at attachment point
     double theta = atan((1.0+v/(w*L0))*tan(phi));   // Angle between insulator and horizontal plane at attachment points
@@ -50,7 +50,7 @@ int main() {
     bool statusBool;
 
     std::vector<double> nValues = {5, 2, 1, 0.5, 0.2, 0.1};
-
+    std::cout << "Initial string tension guess: " << H << std::endl;
     for (int i = 0; i< nValues.size(); i++) {
         
         VecDoub q(8);
