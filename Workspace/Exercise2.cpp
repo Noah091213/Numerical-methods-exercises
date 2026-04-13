@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
+#include "NR_C301/code/derule.h"
 
 
 double f(double x){
@@ -10,11 +11,12 @@ double f(double x){
 
 
 double extendedMidpoint(double a, double b, double N) {
-    double h=(b-a)/N-1;
-    double totalSum = 0;
+    double h = (b-a)/(N-1);
+    //std::cout << "h: " << h << std::endl; // Debug
+    double totalSum = 0.0;
 
-    for (int i; i <= N-1; i++ ) {
-        totalSum += f(a + (i + 0.5) * h);   // f_k=f(a+kh)
+    for (int i = 0; i <= (N-1); i++ ) {
+        totalSum += f(a +(i + 0.5) * h);   // f_k=f(a+kh)
     }
 
     return totalSum * h; // All the heights are added together previously, so to find the area we multiply by h (the width)
@@ -22,41 +24,57 @@ double extendedMidpoint(double a, double b, double N) {
 
 
 
-void printAccuracy(double runNumber, double N, double res, double accuracy, double fComp) {
-    std::cout << "| " << std::setw(3) << runNumber << std::setw(8) << N << " | " << std::setw(10) << std::setprecision(8) << res << " | " << std::setw(10) << std::setprecision(8) << accuracy << " | " << std::setw(10) << fComp << " |" << std::endl;
+void printTable(double runNumber, double N, double res, double accuracy, double fComp) {
+    std::cout << "| " << std::setw(3) << runNumber  << " | " << std::setw(14) << N << " | " << std::setw(14) << std::setprecision(10) << res << " | " ;
+    if (accuracy != MAXFLOAT) {
+        std::cout << std::setw(14) << std::setprecision(8) << accuracy;
+    } else {
+        std::cout << std::setw(14) << "";
+    }
+    std::cout << " | " << std::setw(14) << fComp << " |" << std::endl;
 }
 
 
+int main() {    
 
-int main() {
-    
 
-    std::cout << "| " << std::setw(3) << "Try" << " | " << std::setw(8) << "N" << " | " << std::setw(10) << "Result" << " | " << std::setw(10) << "Accuracy" << " | " << std::setw(10) << "FComps" << " |" << std::endl;
-    std::vector<double> areaResults;
+    std::cout << "Exercise II \n" << std::endl;
 
-    for (int k = 0; k <= 200; ++k) {
-        int computations = pow(2,k);
-        int N = computations+1; // We need 1 more box then the amount of computations
-        double a = 0;
-        double b = 4;
+    std::cout << "| " << std::setw(3) << "Try" << " | " << std::setw(14) << "N" << " | " << std::setw(14) << "Result" << " | " << std::setw(14) << "Accuracy" << " | " << std::setw(14) << "FComps" << " |" << std::endl;
+    std::vector<double> areaResults = {};
+    double minAccuracy = pow(10,-3);
+    double a = 0.0;
+    double b = 4.0;
+
+    for (int k = 0; k <= 50; k++) {
+        double computations = pow(2,k);
+        double N = computations+1; // We need 1 more box then the amount of computations
         
         double result = extendedMidpoint(a,b,N);
         areaResults.push_back(result);
 
-        double accuracy = 0;
-        if (areaResults.size() <= 3) {
-            double accuracy = (areaResults[0]-areaResults[1])/(areaResults[1]-areaResults[2]);
-            areaResults.erase(areaResults.begin());
-        } 
+        double accuracy = MAXFLOAT;
     
-        double minAccuracy = pow(10,-3);
+        if (areaResults.size() >= 3) {
+            //std::cout << "Current result: " << areaResults[2] << " Previous result: " << areaResults[1] << " first result: " << areaResults[0] << std::endl;
+            
+            double ak = (areaResults[0]-areaResults[1])/(areaResults[1]-areaResults[2]);    // Find a^k
+            accuracy = std::abs((areaResults[1]-areaResults[0])/(ak-1));                    // Then find the actual accuracy
+            //std::cout << "aK: " << ak << " Accuracy: " << accuracy << std::endl;
+            
+            areaResults.erase(areaResults.begin()); // Remove the oldest calculation
+        } 
 
-        printAccuracy(k, N, result, accuracy, computations);
+        printTable(k+1, N, result, accuracy, computations);
 
         if (accuracy < minAccuracy) {
             break;
         }
     }
+
+    std::cout << "\nExercise III \n" << std::endl;
+
+    
 
 
     return 0;
