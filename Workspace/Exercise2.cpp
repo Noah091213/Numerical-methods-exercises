@@ -2,10 +2,14 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
+#include "NR_C301/code/nr3.h"
+#include "NR_C301/code/quadrature.h"
 #include "NR_C301/code/derule.h"
 
+int deruleComputations = 0;
 
-double f(double x){
+double f(double x, double del){
+    ++deruleComputations;
     return (cos(pow(x, 3)) * exp(-x)) / (sqrt(x));
 }
 
@@ -16,7 +20,7 @@ double extendedMidpoint(double a, double b, double N) {
     double totalSum = 0.0;
 
     for (int i = 0; i <= (N-1); i++ ) {
-        totalSum += f(a +(i + 0.5) * h);   // f_k=f(a+kh)
+        totalSum += f(a +(i + 0.5) * h, 0);   // f_k=f(a+kh)
     }
 
     return totalSum * h; // All the heights are added together previously, so to find the area we multiply by h (the width)
@@ -67,15 +71,38 @@ int main() {
 
         printTable(k+1, N, result, accuracy, computations);
 
-        if (accuracy < minAccuracy) {
+        if (accuracy <= minAccuracy) {
             break;
         }
     }
 
     std::cout << "\nExercise III \n" << std::endl;
 
-    
+    deruleComputations = 0;
+    DErule<double(double, double)> deruleObj(f, a, b);
+    vector<double> deruleResults = {};
 
+    std::cout << "| " << std::setw(3) << "Try" << " | " << std::setw(14) << "N" << " | " << std::setw(14) << "Result" << " | " << std::setw(14) << "Accuracy" << " | " << std::setw(14) << "FComps" << " |" << std::endl;
+    
+    for (int i = 0; i <= 50; i++) {
+        double currentResult = deruleObj.next();
+        deruleResults.push_back(currentResult);
+        double deruleAccuracy = MAXFLOAT;
+
+        if (deruleResults.size() >= 3) {
+            
+            double ak = (deruleResults[0]-deruleResults[1])/(deruleResults[1]-deruleResults[2]);    // Find a^k
+            deruleAccuracy = std::abs((deruleResults[1]-deruleResults[0])/(ak-1));                    // Then find the actual accuracy
+            
+            deruleResults.erase(deruleResults.begin()); // Remove the oldest calculation
+        } 
+
+        printTable(i+1, 0, currentResult, deruleAccuracy, deruleComputations);
+
+        if (deruleAccuracy <= minAccuracy) {
+            break;
+        }
+    }
 
     return 0;
 }
