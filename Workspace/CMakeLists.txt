@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(NR3_DIR "../NR_C301/code")
 set(NR3_UTIL_DIR "../include")
 
-add_executable(run tmp.cpp)
+add_executable(run Exercise2.cpp)
 
 target_include_directories(run PRIVATE ${NR3_DIR} ${NR3_UTIL_DIR})
 
