@@ -54,7 +54,7 @@ int main() {
     res = rhsSolver(t, v); // Use the function to get results for t = 0
 
     std::cout << std::fixed << std::setprecision(6) << // Print the result to commandline
-    " v1'(0) = "   << res[0] << 
+    " v1'(0) =  "  << res[0] << 
     "\n v2'(0) = " << res[1] <<
     "\n v3'(0) = " << res[2] << std::endl;
 
@@ -64,7 +64,7 @@ int main() {
 
     for (int i = 0; i < nList.size(); i++) {    // Loop through all the N values and test them
         std::vector<double> resToPrint = trapFunc(0, 5, v, nList[i]);   // Use the trapFunc funtion to get the result with the given N value
-        std::cout << "N = " << nList[i] << " (" << resToPrint[0] << ", " << resToPrint[1] << ", " << resToPrint[2] << ")" << std::endl; // Print said result
+        std::cout << "N = "<< std::setprecision(0) << nList[i] << std::setprecision(6) <<  " (" << resToPrint[0] << ", " << resToPrint[1] << ", " << resToPrint[2] << ")" << std::endl; // Print said result
     }
 
 
