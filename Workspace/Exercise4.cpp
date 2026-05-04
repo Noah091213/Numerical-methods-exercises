@@ -7,9 +7,9 @@
 std::vector<double> solver(double t, std::vector<double> v) {
     std::vector<double> result;
 
-    result[0] = std::exp(-t) * std::cos(v[1]) + std::pow(v[2], 2) - v[0];
-    result[1] = std::cos(std::pow(v[2], 2)) - v[1];
-    result[2] = std::cos(t) * std::exp(std::pow(-v[0], 2)) - v[2];
+    result.push_back(std::exp(-t) * std::cos(v[1]) + std::pow(v[2], 2) - v[0]);
+    result.push_back(std::cos(std::pow(v[2], 2)) - v[1]);
+    result.push_back(std::cos(t) * std::exp(-std::pow(v[0], 2)) - v[2]);
 
     return result;
 }
@@ -17,7 +17,7 @@ std::vector<double> solver(double t, std::vector<double> v) {
 
 int main() {  
 
-    double t = 0;
+    double t = 0.0;
     std::vector<double> v = {1.0, 2.0, 3.0};
     std::vector<double> res;
 
