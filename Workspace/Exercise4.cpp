@@ -28,10 +28,10 @@ std::vector<double> trapFunc(double minT, double maxT, std::vector<double> v, do
             guessDvDt[i] = v[i] + h * currentDvDt[i];               // Make a guess of the new location
         }
 
-        std::vector<double> actualDvDt = rhsSolver(t+h, guessDvDt); // Get the actual value using the guess
+        std::vector<double> futureDvDt = rhsSolver(t+h, guessDvDt); // Get the actual future value using the guess
 
         for (int i = 0; i < 3; i++) {
-            v[i] = v[i] + (h/2) * (currentDvDt[i] + actualDvDt[i]); // Get the average of the slopes
+            v[i] = v[i] + (h/2) * (currentDvDt[i] + futureDvDt[i]); // Get the average of the slopes
         }
         
         t+=h;   // Take a new step
