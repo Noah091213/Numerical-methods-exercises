@@ -15,18 +15,29 @@ std::vector<double> solver(double t, std::vector<double> v) {
 }
 
 
+
+
+
 int main() {  
 
+    std::cout << "\nExerise 1: \n" << std::endl;
+
+    // Variable definition
     double t = 0.0;
     std::vector<double> v = {1.0, 2.0, 3.0};
     std::vector<double> res;
 
-    res = solver(t, v);
+    res = solver(t, v); // Use the function to get results for t = 0
 
-    std::cout << std::fixed << std::setprecision(6) << 
+    std::cout << std::fixed << std::setprecision(6) << // Print the result to commandline
     " v1'(0) = "   << res[0] << 
     "\n v2'(0) = " << res[1] <<
     "\n v3'(0) = " << res[2] << std::endl;
+
+    std::cout << "\nExerise 2: \n" << std::endl;
+
+
+
 
     return 0;
 }
